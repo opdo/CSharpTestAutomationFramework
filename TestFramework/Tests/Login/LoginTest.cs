@@ -1,5 +1,3 @@
-using OpenQA.Selenium;
-using TestFramework.Consts;
 using TestFramework.Core.Consts;
 using TestFramework.Pages;
 

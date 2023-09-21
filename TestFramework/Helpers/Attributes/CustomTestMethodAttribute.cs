@@ -20,9 +20,15 @@ namespace Microsoft.VisualStudio.TestTools.UnitTesting
         {
             BaseTest.Report.CreateTestName(testMethod.TestMethodName);
 
-            if (RequiredLogin)
+            if (RequiredLogin && BaseTest.Driver.Url.Contains(PageData.Login))
             {
                 Login();
+            }
+
+            if (!string.IsNullOrEmpty(RedirectToPage))
+            {
+                BaseTest.Driver.Go(ConfiguationHelper.GetValue<string>("url") + RedirectToPage);
+                BaseTest.Report.LogMessage($"Redirect to page: {RedirectToPage}");
             }
 
             return base.Execute(testMethod);
@@ -34,12 +40,6 @@ namespace Microsoft.VisualStudio.TestTools.UnitTesting
             loginPage.InputAccount(TestData.VaildUser);
             loginPage.ClickLogin();
             BaseTest.Report.LogMessage($"Login with username: {TestData.VaildUser.Username}");
-
-            if (!string.IsNullOrEmpty(RedirectToPage))
-            {
-                BaseTest.Driver.Go(ConfiguationHelper.GetValue<string>("url") + RedirectToPage);
-                BaseTest.Report.LogMessage($"Redirect to page: {RedirectToPage}");
-            }
         }
     }
 }

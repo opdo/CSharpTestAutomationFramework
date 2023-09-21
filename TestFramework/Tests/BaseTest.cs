@@ -14,20 +14,19 @@ namespace TestFramework.Tests
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public static IWebDriver Driver { get; set; }
         public static IReport Report { get; set; }
-        public static TestContext TestContext { get; set; }
+        public TestContext TestContext { get; set; }
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
         [AssemblyInitialize()]
         public static void AssemblyInitialize(TestContext testContext)
         {
-            TestContext = testContext;
             InitBrower();
-            InitReport();
+            InitReport(testContext);
         }
 
-        private static void InitReport()
+        private static void InitReport(TestContext testContext)
         {
-            Report = new ExtentReportHelper(TestContext, $"Report_{DateTime.Now.ToFileTimeUtc()}.html");
+            Report = new ExtentReportHelper(testContext, $"Report_{DateTime.Now.ToFileTimeUtc()}.html");
         }
 
         private static void InitBrower()

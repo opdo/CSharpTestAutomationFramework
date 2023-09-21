@@ -15,7 +15,6 @@ namespace TestFramework.Pages.Admin
         public void ClickExport(string languageName)
         {
             buttonExport(languageName).Click();
-            // wait
         }
     }
 }

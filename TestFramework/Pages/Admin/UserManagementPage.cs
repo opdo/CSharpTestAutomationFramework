@@ -14,6 +14,8 @@ namespace TestFramework.Pages.Admin
         private IWebElement inputSearchUsername => driver.GetElement("//div[./label[text() = 'Username']]/following-sibling::div/input");
         private IWebElement buttonSearch => driver.GetElement("//button[@type = 'submit']");
         private By xpathResultValue = By.XPath("//div[contains(@class, 'orangehrm-horizontal-padding')]/span");
+        private IWebElement selectUserRole => driver.GetElement("//div[./label[text() = 'User Role']]/following-sibling::div//div[contains(@class, 'oxd-select-wrapper')]");
+
 
         // Method to interact with web UI
         public void InputUsername(string username)
@@ -47,6 +49,12 @@ namespace TestFramework.Pages.Admin
 
             // Error
             return -1;
+        }
+
+        public void SelectUserRole(string role)
+        {
+            selectUserRole.Click();
+            selectUserRole.FindElement(By.XPath($".//div/span[text() = '{role}']")).Click();
         }
     }
 }
